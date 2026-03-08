@@ -1,6 +1,6 @@
 const KeypadControllerHooks = {
   KeypadController: {
-    /* 버튼 ID → 이름 매핑 */
+    /* 버튼 ID → 이름 매핑*/
     BUTTON_MAP: {
       0x7f09006e: "calc_keypad_btn_abs",
       0x7f09006f: "calc_keypad_btn_add",
@@ -28,41 +28,29 @@ const KeypadControllerHooks = {
       0x7f090085: "calc_keypad_btn_x_y",
     },
 
-    /* onClick Hook */
+    /* KeypadController.onClick Hook */
     hookOnClick: function () {
       const KeypadController = Java.use(
         "com.sec.android.app.popupcalculator.calc.controller.KeypadController",
       );
 
-      console.log("[*] KeypadController.onClick Hook Loaded");
-
       const BUTTON_MAP = this.BUTTON_MAP;
 
       KeypadController.onClick.overload("int").implementation = function (id) {
-        console.log("\n=========== onClick() START ===========");
+        console.log("[*] KeypadController.onClick() Hook Loaded");
+        console.log(
+          "\n=========== KeypadController.onClick() START ===========",
+        );
 
         var buttonName = BUTTON_MAP[id] || "UNKNOWN_BUTTON";
 
         console.log("[BUTTON ID]   : " + id);
         console.log("[BUTTON NAME] : " + buttonName);
 
-        /* 버튼 분기 확인 */
-        if (buttonName === "calc_keypad_btn_equal") {
-          console.log("[BRANCH] Equal Button");
-          console.log("→ onEqual() will be called");
-        } else if (buttonName === "calc_keypad_btn_clear") {
-          console.log("[BRANCH] Clear Button");
-          console.log("→ onClearText() will be called");
-        } else if (buttonName === "calc_keypad_btn_deg_rad") {
-          console.log("[BRANCH] DEG/RAD Toggle");
-        } else {
-          console.log("[BRANCH] Normal Input Button");
-        }
-
         /* 원래 함수 실행 */
         var ret = this.onClick(id);
 
-        console.log("=========== onClick() END ===========\n");
+        console.log("=========== KeypadController.onClick() END ===========\n");
 
         return ret;
       };

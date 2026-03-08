@@ -1,49 +1,46 @@
+// 결과를 원하는 문자열로 변경
 Java.perform(function () {
+  var CalculatorTool = Java.use(
+    "com.sec.android.app.popupcalculator.common.logic.CalculateTool",
+  );
 
-    var CalculatorTool = Java.use(
-        "com.sec.android.app.popupcalculator.common.logic.CalculateTool"
-    );
+  var CalculatorToolData = Java.use(
+    "com.sec.android.app.popupcalculator.common.logic.CalculatorToolData",
+  );
 
-    var CalculatorToolData = Java.use(
-        "com.sec.android.app.popupcalculator.common.logic.CalculatorToolData"
-    );
+  console.log("[*] CalculateTool Hook Loaded");
 
-    console.log("[*] CalculateTool Hook Loaded");
+  CalculatorTool.getResult.overload("java.lang.String").implementation =
+    function (expr) {
+      console.log("\n====== CalculateTool.getResult() START ======");
+      console.log("[INPUT STRING] : " + expr);
 
-    CalculatorTool.getResult
-        .overload('java.lang.String')
-        .implementation = function (expr) {
+      var ret = this.getResult(expr);
 
-        console.log("\n====== CalculateTool.getResult() ======");
-        console.log("[INPUT STRING] : " + expr);
+      console.log("Original ResultStr : " + ret.getResultStr());
 
-        var ret = this.getResult(expr);
+      // 기존 값들
+      var displayedText = ret.getDisplayedText();
+      var result = ret.getResult();
+      var errorCode = ret.getErrorCode();
+      var isError = ret.isCalculateError();
 
-        console.log("Original ResultStr : " + ret.getResultStr());
+      // 변경할 문자열
+      var newStr = "DFRC_FILESYSTEM_SEMINAR_ANDROID";
 
-        // 기존 값들
-        var displayedText = ret.getDisplayedText();
-        var result = ret.getResult();
-        var errorCode = ret.getErrorCode();
-        var isError = ret.isCalculateError();
+      console.log("Modified ResultStr : " + newStr);
 
-        // 변경할 문자열
-        var newStr = "DFRC_FILESYSTEM_SEMINAR_ANDROID";
+      // 새 객체 생성
+      var newObj = CalculatorToolData.$new(
+        displayedText,
+        result,
+        newStr,
+        isError,
+        errorCode,
+      );
 
-        console.log("Modified ResultStr : " + newStr);
+      console.log("====== CalculateTool.getResult() END ======\n");
 
-        // 새 객체 생성
-        var newObj = CalculatorToolData.$new(
-            displayedText,
-            result,
-            newStr,
-            isError,
-            errorCode
-        );
-
-        console.log("======================================\n");
-
-        return newObj;
+      return newObj;
     };
-
 });

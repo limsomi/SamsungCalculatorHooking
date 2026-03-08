@@ -27,29 +27,30 @@ const CalculatorHooks = {
                 "com.sec.android.app.popupcalculator.common.logic.CalculatorLogic"
             );
 
-            CalculatorLogic.transInfixStringExp2TokenExp.implementation = function () {
-                console.log("transInfixStringExp2TokenExp()");
+            CalculatorLogic.transInfixStringExp2TokenExp.implementation =
+              function () {
+                console.log("Call transInfixStringExp2TokenExp()");
                 return this.transInfixStringExp2TokenExp();
-            };
+              };
 
             CalculatorLogic.checkInputToken.implementation = function () {
-                console.log("checkInputToken()");
-                return this.checkInputToken();
+              console.log("Call checkInputToken()");
+              return this.checkInputToken();
             };
 
             CalculatorLogic.checkCalculateToken.implementation = function () {
-                console.log("checkCalculateToken()");
-                return this.checkCalculateToken();
+              console.log("Call checkCalculateToken()");
+              return this.checkCalculateToken();
             };
 
             CalculatorLogic.infix2postfix.implementation = function () {
-                console.log("infix2postfix()");
-                return this.infix2postfix();
+              console.log("Call infix2postfix()");
+              return this.infix2postfix();
             };
 
             CalculatorLogic.evaluateExp.implementation = function () {
-                console.log("evaluateExp()");
-                return this.evaluateExp();
+              console.log("Call evaluateExp()");
+              return this.evaluateExp();
             };
         }
     }

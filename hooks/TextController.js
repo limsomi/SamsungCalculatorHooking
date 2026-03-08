@@ -1,7 +1,22 @@
 const TextControllerHooks = {
   TextController: {
     /* onEqual() Hook */
+
     hookOnEqual: function () {
+      const TextController = Java.use(
+        "com.sec.android.app.popupcalculator.calc.controller.TextController",
+      );
+
+      TextController.onEqual.implementation = function () {
+        console.log("[*] TextController.onEqual Hook Loaded");
+        var ret = this.onEqual();
+        return ret;
+      }
+
+
+    },
+
+    hookOnEqualPipeline: function () {
       const TextController = Java.use(
         "com.sec.android.app.popupcalculator.calc.controller.TextController",
       );
@@ -13,7 +28,7 @@ const TextControllerHooks = {
 
         /* Display text 확인 */
         var displayText = this.getDisplayText();
-        console.log("getDisplayText()");
+        console.log("Call getDisplayText() Function");
         console.log("INPUT EXPRESSION: " + displayText);
 
         if (displayText.length == 0) {
@@ -22,7 +37,6 @@ const TextControllerHooks = {
         }
 
         /* Animation 확인 */
-        console.log("Animation check");
         if (this.mAnimation.value) {
           console.log("Animation running -> cancelEnterAnimation()");
           this.cancelEnterAnimation();
@@ -48,11 +62,11 @@ const TextControllerHooks = {
         }
 
         /* 실제 계산 호출 */
-        console.log("mCalculateTool.getResult()");
+        console.log("Call mCalculateTool.getResult() Function");
 
         var result = this.mCalculateTool.value.getResult(displayText);
 
-        console.log("----- Calculation Result -----");
+        console.log("----- Calculation Result(CalculateToolData) -----");
         console.log("DisplayedText : " + result.getDisplayedText());
         console.log("ResultDouble  : " + result.getResult());
         console.log("ResultString  : " + result.getResultStr());
@@ -62,12 +76,12 @@ const TextControllerHooks = {
         /* 원래 함수 실행 */
         var ret = this.onEqual();
 
-        console.log("[STEP 5] UI result update");
+        console.log("UI result update");
 
         console.log("=========== onEqual() END ===========\n");
 
         return ret;
-      };;
+      };
     },
   },
 };

@@ -11,26 +11,26 @@ const TextControllerHooks = {
       TextController.onEqual.implementation = function () {
         console.log("\n=========== onEqual() START ===========");
 
-        /* STEP 1: Display text 확인 */
+        /* Display text 확인 */
         var displayText = this.getDisplayText();
-        console.log("[STEP 1] getDisplayText()");
+        console.log("getDisplayText()");
         console.log("INPUT EXPRESSION: " + displayText);
 
         if (displayText.length == 0) {
-          console.log("[STEP 1] Empty expression -> return");
+          console.log("Empty expression -> return");
           return;
         }
 
-        /* STEP 2: Animation 확인 */
-        console.log("[STEP 2] Animation check");
+        /* Animation 확인 */
+        console.log("Animation check");
         if (this.mAnimation.value) {
           console.log("Animation running -> cancelEnterAnimation()");
           this.cancelEnterAnimation();
         }
 
-        /* STEP 3: ResultFlag 처리 */
+        /* ResultFlag 처리 */
         if (this.mResultFlag.value) {
-          console.log("[STEP 3] ResultFlag true -> recalculation");
+          console.log("ResultFlag true -> recalculation");
 
           var prevFormula = this.getPrevFormulaBackup();
           console.log("Prev formula: " + prevFormula);
@@ -47,8 +47,8 @@ const TextControllerHooks = {
           console.log("Updated Expression: " + displayText);
         }
 
-        /* STEP 4: 실제 계산 호출 */
-        console.log("[STEP 4] mCalculateTool.getResult()");
+        /* 실제 계산 호출 */
+        console.log("mCalculateTool.getResult()");
 
         var result = this.mCalculateTool.value.getResult(displayText);
 
@@ -67,7 +67,7 @@ const TextControllerHooks = {
         console.log("=========== onEqual() END ===========\n");
 
         return ret;
-      };
+      };;
     },
   },
 };

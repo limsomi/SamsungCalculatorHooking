@@ -1,0 +1,73 @@
+# Project Structure
+DFRC_SEMINAR_ANDROID_CALCULATOR_ANALYSIS
+│
+├─ bypass
+│   ├─ calculate_bypass.js
+│   └─ calculate_string_bypass.js
+│
+├─ hooks
+│   ├─ CalculatorLogic.js
+│   ├─ CalculatorTool.js
+│   ├─ KeyPadController.js
+│   └─ TextController.js
+│
+├─ Frida_venv
+│
+├─ main.js
+└─ .gitignore
+# Directory Description
+## hooks/
+
+Calculator 주요 클래스 Frida Hook 스크립트
+
+### CalculatorLogic.js
+
+계산 로직 클래스 후킹
+계산 처리 과정 추적
+
+### CalculatorTool.js
+
+수식 계산 함수 후킹
+입력 수식 및 결과 출력
+
+### KeyPadController.js
+
+키패드 입력 이벤트 후킹
+사용자 입력 추적
+
+### TextController.js
+
+계산 결과 출력 처리 후킹
+화면 표시 과정 분석
+
+## bypass/
+
+애플리케이션 내부 검증 로직 우회 스크립트
+
+### calculate_bypass.js
+
+계산 결과 검증 로직 우회
+
+### calculate_string_bypass.js
+
+문자열 기반 계산 처리 로직 변조
+
+## main.js
+
+Frida 실행 시 모든 Hook 스크립트 로드
+
+Hook 초기화 및 분석 수행
+
+# Execution
+frida -U -f com.sec.android.app.popupcalculator \
+-l hooks/CalculatorLogic.js \
+-l hooks/CalculatorTool.js \
+-l hooks/KeyPadController.js \
+-l hooks/TextController.js \
+-l main.js
+# Option
+| Option | Description    |
+| ------ | -------------- |
+| -U     | USB 연결 디바이스 사용 |
+| -f     | 앱 spawn 실행     |
+| -l     | Frida 스크립트 로드  |

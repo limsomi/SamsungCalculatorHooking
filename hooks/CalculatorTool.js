@@ -13,32 +13,60 @@ const GetResultHooks = {
         };
     },
 
+    hookGetResult2PipeLine: function(){
+        const CalculateTool = Java.use(
+          "com.sec.android.app.popupcalculator.common.logic.CalculateTool",
+        );
+        /* onInsertText() */
+        const getResult2 = CalculateTool.getResult.overload(
+            "java.lang.String",
+            "int",
+            "int",
+            "java.lang.String",
+            "boolean",
+            "boolean"
+        );
+
+        getResult2.implementation = function (
+            expr, iMin, iMax, input, resultFlag, lockScreen
+        ) {
+
+          console.log("\n====== getResult(Calling by onInsertText) ======");
+          console.log("[CALL PATH] onInsertText()");
+          console.log("[CURRENT EXPRESSION] : " + expr);
+          console.log("[INPUT TEXT] : " + input);
+          console.log("[CURSOR START] : " + iMin);
+          console.log("[CURSOR END] : " + iMax);
+
+          var ret = getResult2.call(
+              this,
+              expr, iMin, iMax, input, resultFlag, lockScreen
+          );
+
+          console.log("ResultStr : " + ret.getResultStr());
+          console.log("======================================");
+
+          return ret;
+        };
+    },
+
     hookGetResultPipeLine: function () {
       const CalculateTool = Java.use(
         "com.sec.android.app.popupcalculator.common.logic.CalculateTool",
       );
 
-      CalculateTool.getResult.overload("java.lang.String").implementation =
-        function (str) {
-          console.log("\n================ getResult() ================");
-          console.log("[INPUT] " + str);
+       const getResult1 = CalculateTool.getResult.overload("java.lang.String");
 
-          var ret = this.getResult(str);
+        getResult1.implementation = function (expr) {
 
-          try {
-            console.log("----- CalculatorToolData Fields -----");
+          console.log("\n====== getResult ======");
+          console.log("[CALL PATH] onEqual()");
+          console.log("[INPUT EXPRESSION] : " + expr);
 
-            console.log("DisplayedText  : " + ret.getDisplayedText());
-            console.log("Result         : " + ret.getResult());
-            console.log("ResultStr      : " + ret.getResultStr());
-            console.log("ErrorCode      : " + ret.getErrorCode());
-            console.log("IsCalcError    : " + ret.isCalculateError());
+          var ret = getResult1.call(this, expr);
 
-            console.log("-------------------------------------");
-          } catch (e) {
-            console.log("[ERROR reading fields] " + e);
-          }
-          console.log("=============================================\n");
+          console.log("ResultStr : " + ret.getResultStr());
+          console.log("================================");
 
           return ret;
         };

@@ -83,5 +83,53 @@ const TextControllerHooks = {
         return ret;
       };
     },
+
+
+    hookOnInsertText: function(){
+      var TextController = Java.use(
+        "com.sec.android.app.popupcalculator.calc.controller.TextController"
+      );
+
+      
+      TextController.onInsertText
+      .overload('java.lang.String')
+      .implementation = function (text) {
+          console.log("[*] onInsertText Hook Loaded");
+          var ret = this.onInsertText(text);
+          return ret;
+        }
+    },
+
+    hookSetDisplayText: function(){
+      var TextController = Java.use(
+        "com.sec.android.app.popupcalculator.calc.controller.TextController"
+      );
+
+      
+      TextController.setDisplayText
+      .overload('java.lang.String')
+      .implementation = function (text) {
+        console.log("[*] setDisplayText Hook Loaded");
+        console.log("\n====== setDisplayText() ======");
+        
+        try {
+            console.log("[OLD DISPLAY TEXT] : " + this.getDisplayText());
+        } catch (e) {}
+
+        console.log("[NEW DISPLAY TEXT] : " + text);
+
+        var ret = this.setDisplayText(text);
+
+        try {
+            console.log("[APPLIED DISPLAY TEXT] : " + this.getDisplayText());
+        } catch (e) {}
+
+        console.log("====== END setDisplayText() ======\n");
+
+        return ret;
+      };
+
+
+    }
   },
 };

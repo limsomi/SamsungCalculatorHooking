@@ -48,14 +48,14 @@ Java.perform(function () {
 
     /* Infix → Postfix */
     CalculatorLogic.infix2postfix.implementation = function () {
-        console.log("[STEP] infix2postfix()");
-        return this.infix2postfix();
+      console.log("infix2postfix()");
+      return this.infix2postfix();
     };
 
     /* Actual evaluation */
     CalculatorLogic.evaluateExp.implementation = function () {
-        console.log("[STEP] evaluateExp()");
-        return this.evaluateExp();
+      console.log("evaluateExp()");
+      return this.evaluateExp();
     };
 
 });

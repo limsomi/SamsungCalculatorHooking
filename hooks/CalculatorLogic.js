@@ -28,27 +28,27 @@ const CalculatorHooks = {
             );
 
             CalculatorLogic.transInfixStringExp2TokenExp.implementation = function () {
-                console.log("[STEP] transInfixStringExp2TokenExp()");
+                console.log("transInfixStringExp2TokenExp()");
                 return this.transInfixStringExp2TokenExp();
             };
 
             CalculatorLogic.checkInputToken.implementation = function () {
-                console.log("[STEP] checkInputToken()");
+                console.log("checkInputToken()");
                 return this.checkInputToken();
             };
 
             CalculatorLogic.checkCalculateToken.implementation = function () {
-                console.log("[STEP] checkCalculateToken()");
+                console.log("checkCalculateToken()");
                 return this.checkCalculateToken();
             };
 
             CalculatorLogic.infix2postfix.implementation = function () {
-                console.log("[STEP] infix2postfix()");
+                console.log("infix2postfix()");
                 return this.infix2postfix();
             };
 
             CalculatorLogic.evaluateExp.implementation = function () {
-                console.log("[STEP] evaluateExp()");
+                console.log("evaluateExp()");
                 return this.evaluateExp();
             };
         }

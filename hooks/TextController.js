@@ -1,13 +1,14 @@
-Java.perform(function () {
+const TextControllerHooks = {
+  TextController: {
+    /* onEqual() Hook */
+    hookOnEqual: function () {
+      const TextController = Java.use(
+        "com.sec.android.app.popupcalculator.calc.controller.TextController",
+      );
 
-    var Calculator = Java.use(
-        "com.sec.android.app.popupcalculator.calc.controller.TextController"
-    );
+      console.log("[*] TextController.onEqual Hook Loaded");
 
-    console.log("[*] onEqual Hook Loaded");
-
-    Calculator.onEqual.implementation = function () {
-
+      TextController.onEqual.implementation = function () {
         console.log("\n=========== onEqual() START ===========");
 
         /* STEP 1: Display text 확인 */
@@ -16,35 +17,34 @@ Java.perform(function () {
         console.log("INPUT EXPRESSION: " + displayText);
 
         if (displayText.length == 0) {
-            console.log("[STEP 1] Empty expression -> return");
-            return;
+          console.log("[STEP 1] Empty expression -> return");
+          return;
         }
 
         /* STEP 2: Animation 확인 */
         console.log("[STEP 2] Animation check");
         if (this.mAnimation.value) {
-            console.log("Animation running -> cancelEnterAnimation()");
-            this.cancelEnterAnimation();
+          console.log("Animation running -> cancelEnterAnimation()");
+          this.cancelEnterAnimation();
         }
 
         /* STEP 3: ResultFlag 처리 */
         if (this.mResultFlag.value) {
+          console.log("[STEP 3] ResultFlag true -> recalculation");
 
-            console.log("[STEP 3] ResultFlag true -> recalculation");
+          var prevFormula = this.getPrevFormulaBackup();
+          console.log("Prev formula: " + prevFormula);
 
-            var prevFormula = this.getPrevFormulaBackup();
-            console.log("Prev formula: " + prevFormula);
+          var recalc = this.getReCalculationText(prevFormula);
+          console.log("ReCalculationText: " + recalc);
 
-            var recalc = this.getReCalculationText(prevFormula);
-            console.log("ReCalculationText: " + recalc);
+          if (recalc.length == 0) {
+            console.log("ReCalculationText empty -> return");
+            return;
+          }
 
-            if (recalc.length == 0) {
-                console.log("ReCalculationText empty -> return");
-                return;
-            }
-
-            displayText = displayText + recalc;
-            console.log("Updated Expression: " + displayText);
+          displayText = displayText + recalc;
+          console.log("Updated Expression: " + displayText);
         }
 
         /* STEP 4: 실제 계산 호출 */
@@ -59,7 +59,7 @@ Java.perform(function () {
         console.log("ErrorCode     : " + result.getErrorCode());
         console.log("------------------------------");
 
-        /* 원래 함수 동작 유지 */
+        /* 원래 함수 실행 */
         var ret = this.onEqual();
 
         console.log("[STEP 5] UI result update");
@@ -67,6 +67,7 @@ Java.perform(function () {
         console.log("=========== onEqual() END ===========\n");
 
         return ret;
-    };
-
-});
+      };
+    },
+  },
+};

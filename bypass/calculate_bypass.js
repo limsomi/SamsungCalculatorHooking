@@ -30,19 +30,19 @@ Java.perform(function () {
 
     /* Tokenization */
     CalculatorLogic.transInfixStringExp2TokenExp.implementation = function () {
-        console.log("[STEP] transInfixStringExp2TokenExp()");
+        console.log("transInfixStringExp2TokenExp()");
         return this.transInfixStringExp2TokenExp();
     };
 
     /* Input validation */
     CalculatorLogic.checkInputToken.implementation = function () {
-        console.log("[STEP] checkInputToken()");
+        console.log("checkInputToken()");
         return this.checkInputToken();
     };
 
     /* Calculation validation */
     CalculatorLogic.checkCalculateToken.implementation = function () {
-        console.log("[STEP] checkCalculateToken()");
+        console.log("checkCalculateToken()");
         return this.checkCalculateToken();
     };
 

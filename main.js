@@ -21,8 +21,11 @@ Java.perform(function () {
       /* CalculatorLogic Class Hook */
       CalculatorHooks.CalculatorLogic.hookCalculate();
       console.log("[HOOK] CalculatorLogic.calculate");
+      
+      CalculatorHooks.CalculatorLogic.hookCalculatePipeline();
+      console.log("[HOOK] CalculatorLogic.calculate");
 
-      /* CalculatorTool Class Hook */
+      // /* CalculatorTool Class Hook */
       GetResultHooks.CalculateTool.hookGetResultOfonInsertTextPipeLine();
       console.log("[HOOK] GetResult(Calling by onInsertText)");
 

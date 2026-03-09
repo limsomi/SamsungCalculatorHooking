@@ -73,7 +73,19 @@ const GetResultHooks = {
 
           var ret = getResult.call(this, expr);
 
-          console.log("ResultStr : " + ret.getResultStr());
+          var displayedText = ret.getDisplayedText();
+          var result = ret.getResult();
+          var resultStr=ret.getResultStr();
+          var errorCode = ret.getErrorCode();
+          var isError = ret.isCalculateError();
+
+          console.log("-------- CalculateToolData Object Fields --------")
+          console.log("DisplayedText : " + displayedText);
+          console.log("Result        : " + result);
+          console.log("ResultStr     : " + resultStr);
+          console.log("ErrorCode     : " + errorCode);
+          console.log("IsCalcError   : " + isError);
+          console.log("------------------------------------------------")
           console.log("====== CalcualteTool.getResult() END ======");
 
           return ret;
